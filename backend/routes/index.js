@@ -23,7 +23,7 @@ const deleteAddToCartProduct = require("../controller/user/deleteAddToCartProduc
 const searchProduct = require("../controller/product/searchProduct");
 const filterProductController = require("../controller/product/filterProduct");
 const deleteProductController = require("../controller/product/deleteProduct");
-const { addAddress } = require("../controller/user/addressController");
+const addAddressController = require("../controller/user/addAddressController")
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -53,9 +53,7 @@ router.post("/update-cart-product", authToken, updateAddToCartProduct);
 router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 
 //user address
-router.post("/add", addAddress);
-// router.get("/get/:userId", fetchAllAddress);
-// router.delete("/delete/:userId/:addressId", deleteAddress);
-// router.put("/update/:userId/:addressId", editAddress);
+router.post("/addaddress", authToken, addAddressController)
+
 
 module.exports = router;

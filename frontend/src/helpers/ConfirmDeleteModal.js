@@ -10,7 +10,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => {
         </p>
         <div className="flex justify-around mt-4">
           <button
-            className="bg-red-600 text-white p-2 rounded"
+            className="bg-red-500 hover:bg-red-700 text-white p-2 rounded"
             onClick={onConfirm}
           >
             Delete

@@ -7,6 +7,7 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import AddAddressForm from "../components/AddAddress";
 import { setUserDetails } from "../store/userSlice";
+import DisplayAddressInfo from "../components/DisplayAddress";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -226,8 +227,11 @@ const Cart = () => {
               )}
             </div>
           )}
-
+        {user?._id && (
           <AddAddressForm />
+        )}
+
+          <DisplayAddressInfo />
         </div>
       </div>
     </div>

@@ -7,11 +7,11 @@ import AdminDeleteProduct from "./AdminDeleteProduct";
 
 const AdminProductCard = ({ data, fetchdata }) => {
   const [editProduct, setEditProduct] = useState(false);
-  const [deleteProduct, setDeleteProduct] = useState(false); 
+  const [deleteProduct, setDeleteProduct] = useState(false);
 
   return (
-    <div className="bg-white p-4 rounded ">
-      <div className="w-40">
+    <div className="bg-white p-4 rounded mt-2 mx-4 ">
+      <div className="w-40 ">
         <div className="w-32 h-32 flex justify-center items-center">
           <img
             src={data?.productImage[0]}
@@ -34,7 +34,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
         </div>
 
         <div
-          className="w-fit ml-auto p-2 bg-red-100 hover:bg-red-600 rounded-full hover:text-white cursor-pointer"
+          className="w-fit ml-auto p-2 bg-red-100 hover:bg-red-600 rounded-full hover:text-white cursor-pointer mt-2"
           onClick={() => setDeleteProduct(true)}
         >
           <MdDelete />
@@ -52,7 +52,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
       {deleteProduct && (
         <AdminDeleteProduct
           productId={data._id}
-          onDeleteSuccess={fetchdata} 
+          onDeleteSuccess={fetchdata}
           onClose={() => setDeleteProduct(false)}
         />
       )}

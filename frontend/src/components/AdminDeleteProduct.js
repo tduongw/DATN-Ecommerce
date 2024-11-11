@@ -36,7 +36,7 @@ const AdminDeleteProduct = ({ productId, onDeleteSuccess, onClose }) => {
   return (
     <div>
       <button
-        className="bg-red-600 text-white p-2 rounded"
+        className="bg-red-600 text-white p-2 rounded mt-2 mx-4"
         onClick={() => setShowModal(true)}
       >
         Delete Product

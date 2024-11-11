@@ -52,53 +52,60 @@ const BannerProduct = () => {
   }, [currentImage]);
 
   return (
-    <div className="container rounded ">
-      <div className="h-[62vh] w-full bg-slate-200 relative rounded-2xl">
-        <div className="absolute z-10 h-full w-full md:flex items-center hidden ">
-          <div className=" flex justify-between w-full text-2xl">
-            <button
-              onClick={preveImage}
-              className="bg-white shadow-md rounded-xl p-2 ml-2"
-            >
-              <FaAngleLeft />
-            </button>
-            <button
-              onClick={nextImage}
-              className="bg-white shadow-md rounded-xl p-2 mr-2"
-            >
-              <FaAngleRight />
-            </button>
+    <div className="container rounded flex-col">
+      <div className="flex">
+        <div className="hidden md:block h-[62vh] w-3/4 bg-slate-200 relative rounded-3xl">
+          <div className="absolute z-10 h-full w-full md:flex items-center hidden">
+            <div className="flex justify-between w-full text-2xl">
+              <button
+                onClick={preveImage}
+                className="bg-white shadow-md rounded-xl p-2 ml-2"
+              >
+                <FaAngleLeft />
+              </button>
+              <button
+                onClick={nextImage}
+                className="bg-white shadow-md rounded-xl p-2 mr-2"
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
+
+          {/**desktop and tablet version */}
+          <div className="hidden md:flex h-full w-full overflow-hidden rounded-2xl ml-2">
+            {desktopImages.map((imageURl, index) => {
+              return (
+                <div
+                  className="w-full h-full min-w-full min-h-full transition-all"
+                  key={imageURl}
+                  style={{ transform: `translateX(-${currentImage * 100}%)` }}
+                >
+                  <img src={imageURl} className="w-full h-full" />
+                </div>
+              );
+            })}
+          </div>
+
+          {/**mobile version */}
+          <div className="flex h-full w-full overflow-hidden md:hidden rounded-2xl">
+            {mobileImages.map((imageURl, index) => {
+              return (
+                <div
+                  className="w-full h-full min-w-full min-h-full transition-all"
+                  key={imageURl}
+                  style={{ transform: `translateX(-${currentImage * 100}%)` }}
+                >
+                  <img src={imageURl} className="w-full h-full object-cover" />
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/**desktop and tablet version */}
-        <div className="hidden md:flex h-full w-full overflow-hidden ">
-          {desktopImages.map((imageURl, index) => {
-            return (
-              <div
-                className="w-full h-full min-w-full min-h-full transition-all"
-                key={imageURl}
-                style={{ transform: `translateX(-${currentImage * 100}%)` }}
-              >
-                <img src={imageURl} className="w-full h-full" />
-              </div>
-            );
-          })}
-        </div>
-
-        {/**mobile version */}
-        <div className="flex h-full w-full overflow-hidden md:hidden rounded-2xl ">
-          {mobileImages.map((imageURl, index) => {
-            return (
-              <div
-                className="w-full h-full min-w-full min-h-full transition-all"
-                key={imageURl}
-                style={{ transform: `translateX(-${currentImage * 100}%)` }}
-              >
-                <img src={imageURl} className="w-full h-full object-cover" />
-              </div>
-            );
-          })}
+        <div className="w-1/4 md:w-1/4 flex items-center justify-center bg-red-600 p-4 md:flex-none">
+              <div className=""></div>
+        
         </div>
       </div>
     </div>
