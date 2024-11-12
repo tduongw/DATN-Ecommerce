@@ -17,48 +17,46 @@ const AddAddressForm = ({ userId }) => {
   };
 
   // Xử lý submit form
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const addressData = { userId, ...formData };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const addressData = { userId, ...formData };
 
-  try {
-    const response = await fetch("http://localhost:8080/api/addaddress", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("authToken")}`, // Thêm token nếu cần
-      },
-      body: JSON.stringify(addressData),
-    });
-
-    // Kiểm tra phản hồi từ server
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      const errorText = await response.text();
-      console.error("Unexpected server response:", errorText);
-      toast.error("Server returned unexpected response format.");
-      return;
-    }
-
-    const data = await response.json();
-    if (response.ok && data.success) {
-      toast.success("Address added successfully!");
-      setFormData({
-        address: "",
-        city: "",
-        pincode: "",
-        phone: "",
-        notes: "",
+    try {
+      const response = await fetch("http://localhost:8080/api/addaddress", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(addressData),
       });
-    } else {
-      toast.error(data.message || "Failed to add address.");
-    }
-  } catch (error) {
-    console.error("Fetch error:", error);
-    toast.error("Error submitting the form. Please try again.");
-  }
-};
 
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const errorText = await response.text();
+        console.error("Unexpected server response:", errorText);
+        toast.error("Server returned unexpected response format.");
+        return;
+      }
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        toast.success("Address added successfully!");
+        setFormData({
+          address: "",
+          city: "",
+          pincode: "",
+          phone: "",
+          notes: "",
+        });
+      } else {
+        toast.error(data.message || "Failed to add address.");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      toast.error("Error submitting the form. Please try again.");
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-5">
